@@ -17,7 +17,7 @@ func main() {
 	log.Printf("Build info: %s @ %s", commit, builtAt)
 
 	config := flag.String("config", "", "Config file path")
-	host := flag.String("HOST", "localhost", "Domain")
+	host := flag.String("HOST", "", "Domain")
 	httpPort := flag.String("PORT", "8080", "HTTP port")
 	httpsPort := flag.String("HTTPS_PORT", "", "HTTPS port")
 	isDev := flag.Bool("IS_DEVELOPMENT", false, "Is Dev Env.")
