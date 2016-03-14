@@ -18,8 +18,8 @@ func main() {
 
 	config := flag.String("config", "", "Config file path")
 	host := flag.String("HOST", "localhost", "Domain")
-	httpPort := flag.String("HTTP_PORT", "8080", "HTTP port")
-	httpsPort := flag.String("HTTPS_PORT", "8443", "HTTPS port")
+	httpPort := flag.String("PORT", "8080", "HTTP port")
+	httpsPort := flag.String("HTTPS_PORT", "", "HTTPS port")
 	isDev := flag.Bool("IS_DEVELOPMENT", false, "Is Dev Env.")
 	cert := flag.String("CERT", "cert.pem", "Certification path")
 	key := flag.String("KEY", "key.pem", "Private Key path")
