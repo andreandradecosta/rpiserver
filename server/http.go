@@ -56,7 +56,7 @@ func (h *HTTPServer) Start() {
 	l := log.New(os.Stdout, "[negroni] ", 0)
 
 	// HTTPS
-	if h.HTTPPort != "" {
+	if h.HTTPPort != "" && h.Cert != "" {
 		httpsAddr := ":" + h.HTTPSPort
 		l.Printf("listening on https://%s%s", h.Host, httpsAddr)
 		go func() {
