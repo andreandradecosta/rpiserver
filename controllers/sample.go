@@ -3,7 +3,6 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"time"
 
@@ -52,14 +51,15 @@ func (s *sample) snapshot(w http.ResponseWriter, r *http.Request) error {
 	if err != nil {
 		return err
 	}
+	delete(d.Metrics, "disk_io")
 	s.JSON(w, http.StatusOK, d)
 	return nil
 }
 
 func (s *sample) history(w http.ResponseWriter, r *http.Request) error {
 	start, err1 := time.Parse("2006-01-02", r.FormValue("start"))
-	stop, err2 := time.Parse("2006-01-02", r.FormValue("stop"))
-	log.Println(stop)
+	stop, err2 := time.Parse("2006-01-02", r.FormValue("end"))
+
 	if err1 != nil || err2 != nil {
 		return fmt.Errorf("Inavlid parameters: %v", r.Form)
 	}
@@ -79,7 +79,10 @@ func (s *sample) history(w http.ResponseWriter, r *http.Request) error {
 		Select(bson.M{
 			"localtime":              1,
 			"timestamp":              1,
+			"metrics.load":           1,
 			"metrics.virtual_memory": 1,
+			"metrics.swap_memory":    1,
+			"metrics.temperature":    1,
 		}).
 		Sort("-localtime").
 		All(&result)
