@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/andreandradecosta/rpiserver/db"
+	"github.com/andreandradecosta/rpimonitor/db"
 	"github.com/andreandradecosta/rpiserver/server"
 	"github.com/namsral/flag"
 )

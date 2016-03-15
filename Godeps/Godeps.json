@@ -3,9 +3,14 @@
 	"GoVersion": "go1.6",
 	"Deps": [
 		{
+			"ImportPath": "github.com/andreandradecosta/rpimonitor/db",
+			"Comment": "2.0.2",
+			"Rev": "e53e910b857fbc452dc424cd55ec134bf3da8632"
+		},
+		{
 			"ImportPath": "github.com/andreandradecosta/rpimonitor/models",
-			"Comment": "1.2.1-5-gc6fffe1",
-			"Rev": "c6fffe1eb4256af50131f542ec767a7ff14fa0ef"
+			"Comment": "2.0.2",
+			"Rev": "e53e910b857fbc452dc424cd55ec134bf3da8632"
 		},
 		{
 			"ImportPath": "github.com/codegangsta/negroni",
