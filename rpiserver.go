@@ -9,12 +9,11 @@ import (
 )
 
 var (
-	commit  string
-	builtAt string
+	buildInfo string
 )
 
 func main() {
-	log.Printf("Build info: %s @ %s", commit, builtAt)
+	log.Printf("Build info: %s", buildInfo)
 
 	config := flag.String("config", "", "Config file path")
 	host := flag.String("HOST", "", "Domain")

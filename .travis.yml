@@ -5,7 +5,7 @@ go:
 install:
 - true
 script:
-- go build -ldflags "-X main.commit=`git rev-parse --short HEAD` -X main.builtAt=`date+%FT%T%z`" -v -o rpiserver
+- go build -ldflags "-X main.buildInfo=`git rev-parse --short HEAD`" -v -o rpiserver
 deploy:
   provider: releases
   api_key:
