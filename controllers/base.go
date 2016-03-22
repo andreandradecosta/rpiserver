@@ -3,6 +3,7 @@ package controllers
 import (
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/garyburd/redigo/redis"
 
@@ -16,6 +17,7 @@ type controller struct {
 	*render.Render
 	redisPool    *redis.Pool
 	mongoSession *mgo.Session
+	hostLocation *time.Location
 }
 
 func (c *controller) handleAction(a action) http.Handler {

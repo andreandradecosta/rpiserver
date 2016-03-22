@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/andreandradecosta/rpiserver/controllers"
 	"github.com/codegangsta/negroni"
@@ -24,6 +25,7 @@ type HTTPServer struct {
 	Key          string
 	RedisPool    *redis.Pool
 	MongoSession *mgo.Session
+	HostLocation *time.Location
 }
 
 //Start configures the http server and starts listening requests.
@@ -46,7 +48,7 @@ func (h *HTTPServer) Start() {
 	renderer := render.New(render.Options{
 		IndentJSON: true,
 	})
-	controllers.NewStatus(renderer, router, h.RedisPool)
+	controllers.NewStatus(renderer, router, h.RedisPool, h.HostLocation)
 	controllers.NewSample(renderer, router, h.RedisPool, h.MongoSession)
 
 	n := negroni.Classic()

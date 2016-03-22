@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"time"
 
 	"github.com/andreandradecosta/rpimonitor/db"
 	"github.com/andreandradecosta/rpiserver/server"
@@ -16,6 +17,7 @@ func main() {
 	log.Printf("Build info: %s", buildInfo)
 
 	config := flag.String("config", "", "Config file path")
+	location := flag.String("LOCATION", "America/Sao_Paulo", "Host location")
 	host := flag.String("HOST", "", "Domain")
 	httpPort := flag.String("PORT", "8080", "HTTP port")
 	httpsPort := flag.String("HTTPS_PORT", "", "HTTPS port")
@@ -32,6 +34,11 @@ func main() {
 	if *config != "" {
 		log.Println("Using ", *config)
 	}
+	hostLocation, err := time.LoadLocation(*location)
+	if err != nil {
+		panic(err)
+	}
+
 	db := db.NewDB(*mongoURL, *redisHost, *redisPasswd)
 
 	s := &server.HTTPServer{
@@ -43,6 +50,7 @@ func main() {
 		Key:          *key,
 		RedisPool:    db.RedisPool,
 		MongoSession: db.MongoSession,
+		HostLocation: hostLocation,
 	}
 	s.Start()
 }

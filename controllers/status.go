@@ -16,8 +16,8 @@ type status struct {
 }
 
 //NewStatus creates this controller and register it with router.
-func NewStatus(renderer *render.Render, router *mux.Router, redisPool *redis.Pool) {
-	s := &status{controller{Render: renderer, redisPool: redisPool}}
+func NewStatus(renderer *render.Render, router *mux.Router, redisPool *redis.Pool, hostLocation *time.Location) {
+	s := &status{controller{Render: renderer, redisPool: redisPool, hostLocation: hostLocation}}
 	router.
 		Methods("GET").
 		Path("/").
@@ -81,7 +81,7 @@ func (s *status) updated(w http.ResponseWriter, r *http.Request) error {
 	if err != nil {
 		return err
 	}
-	date := time.Unix(up, 0)
+	date := time.Unix(up, 0).In(s.hostLocation)
 	res := map[string]time.Time{
 		"updated": date,
 	}
